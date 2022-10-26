@@ -26,20 +26,35 @@ Element 2 of matrix B
 Input in sasm input window
 
 2
+
 3
+
 1
+
 2
+
 3
+
 4
+
 5
+
 6
+
 3
+
 2
+
 7
+
 8
+
 9
+
 10
+
 11
+
 12
 
 Output:
