@@ -31,8 +31,8 @@ CMAIN:
     ;write your code here
     ;MATRIX 1
     
-    GET_DEC 2, EAX
-    GET_DEC 2, EBX
+    GET_DEC 4, EAX
+    GET_DEC 4, EBX
     
     
    MOV [rowa], EAX
@@ -46,22 +46,22 @@ CMAIN:
     MOV EBX, 0
     
     mov edx, 0
-    L1: GET_DEC 2, [mata+EBX]
-        add EBX, 2
+    L1: GET_DEC 4, [mata+EBX]
+        add EBX, 4
         LOOP L1
        
         
     
     ;TESTING
-    MOV ECX, [counta]
-    MOV EBX, 0
-    L3: PRINT_DEC 2, [mata+EBX]
-        add EBX, 2
-        LOOP L3
+   ; MOV ECX, [counta]
+   ; MOV EBX, 0
+   ; L3: PRINT_DEC 4, [mata+EBX]
+    ;    add EBX, 4
+    ;    LOOP L3
             
     ;MATRIX 2
-    GET_DEC 2, EAX
-    GET_DEC 2, EBX
+    GET_DEC 4, EAX
+    GET_DEC 4, EBX
     
     MOV [rowb], EAX
     MOV [colb], EBX
@@ -75,21 +75,21 @@ CMAIN:
     MOV ECX, [countb]
     MOV EBX, 0
     
-    L2: GET_DEC 2, [matb+EBX]
-        add EBX, 2
+    L2: GET_DEC 4, [matb+EBX]
+        add EBX, 4
         LOOP L2
         
    ;test print   
-   NEWLINE
-    MOV ECX, [countb]
-    MOV EBX, 0
-    L4: PRINT_DEC 2, [matb+EBX]
-        add EBX, 2
-        LOOP L4
+   ;NEWLINE
+   ; MOV ECX, [countb]
+   ; MOV EBX, 0
+  ;  L4: PRINT_DEC 4, [matb+EBX]
+    ;    add EBX, 4
+   ;     LOOP L4
     
  mov dword[tempi], 0 ; i
  mov dword[tempvar], 0
-NEWLINE
+;NEWLINE
 outerLoop:
            MOV ECX, [tempi]
            cmp ECX, [rowa]   ; ECX has to be lesser than rowa
@@ -103,7 +103,7 @@ innerLoop1:
            IMUL EBX
            LEA ESI, [matc]
            ADD EAX, [tempj]
-           MOV dword[ESI+eax*2], 0                 ;res[i][j] = 0;
+           MOV dword[ESI+eax*4], 0                 ;res[i][j] = 0;
            MOV EBX, [tempj]
            cmp EBX, [colb] ; ebx has to be lesser than colb
            je innerLoop1Done
@@ -118,7 +118,7 @@ innerLoop2:
            IMUL EBX
            LEA ESI, [mata]
            add eax, [tempk]
-           MOV Ecx,  dword[ESI+eax*2]
+           MOV Ecx,  dword[ESI+eax*4]
            MOV [temp3], ECX
            
            MOV EAX, dword[colb]
@@ -126,7 +126,7 @@ innerLoop2:
            IMUL EBX
            LEA ESI, [matb]
            ADD EAX, [tempj]
-           MOV EDX, dword[ESI+eax*2]
+           MOV EDX, dword[ESI+eax*4]
            mov [temp4], EDX
            
            
@@ -151,7 +151,7 @@ innerLoop2:
 innerLoop2Done:
     MOV EAX, [acc]
     MOV EBX, [tempvar]
-    MOV [matc+EBX*2], eax
+    MOV [matc+EBX*4], eax
     inc dword[tempj]
     inc dword[tempvar]
     jmp innerLoop1
@@ -174,7 +174,7 @@ done:
     
     
     NEWLINE
-    L5: PRINT_DEC 2,  [matc+EBX*2]
+    L5: PRINT_DEC 4,  [matc+EBX*4]
         PRINT_STRING " "
         INC EBX
         INC EDX
